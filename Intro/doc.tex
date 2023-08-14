@@ -8,9 +8,10 @@ In particular, Dedalus uses distributed parallelism via MPI. Dedalus hides much 
 
 \subsection{Dedalus GFD tools}\label{sec:Ded_tools}
 \paragraph{Adaptive timestep for when velocity is not a vector field}
-The examples on Dedalus' website that have adaptive timestep uses the \texttt{d3.CFL} function, that take a vector field velocity as the input for calculating the timestep. However, often in GFD models, velocity comes from the derivatives of a streamfunction, and is not a vector field in Dedalus. We implement a simple CFL based adaptive timestep that take in the velocity as separate scalar fields. See the 2D Euler in \ref{chap:2DEuler} example for full details. Note that we need to use the \texttt{d3.GlobalFlowProperty} to take maximum over MPI.
+The examples on Dedalus' website that have adaptive timestep uses the \texttt{d3.CFL} function, that take a vector field velocity as the input for calculating the timestep. However, often in GFD models, velocity comes from the derivatives of a streamfunction, and is not a vector field in Dedalus. We implement a simple CFL based adaptive timestep that take in the velocity as separate scalar fields. See the 2D Euler in Chapter \ref{chap:2DEuler} example for full details\footnote{\url{https://github.com/Empyreal092/GFD_in_Dedalus/blob/main/2D_Euler/code/2D_Euler.py}}. Note that we need to use the \texttt{d3.GlobalFlowProperty} to take maximum over MPI.
 
 \paragraph{Calculating spectrum}
+\url{https://github.com/Empyreal092/GFD_in_Dedalus/blob/main/dedalus_subroutines/isospectrum.py}
 
 \subsection{Desired features in Dedalus}
 Despite the power of Dedalus, there are some features we would like that is not currently implemented. This is a list of wants we have for Dedalus. We feel these should be possible to implement in the spectral set-up of Dedalus. We would be happy to contribute and implement them, but we are currently unclear how.
@@ -74,10 +75,10 @@ In particular, we will use the notation of \cite{Vallis_96a}:
 \end{displayquote}
 For example, the Boussinesq system reads (cf. \cite[(PE.1-4)]{Vallis_17}):
 \begin{align}
-    &\Ro\left(\frac{Du}{Dt}-\beta y v\right)-fv = -\phi_x,\\
-    &\Ro\left(\frac{Dv}{Dt}+\beta y u\right)+fu = -\phi_y,\\
+    &\Ro\left(\frac{\DD u}{\DD t}-\beta y v\right)-fv = -\phi_x,\\
+    &\Ro\left(\frac{\DD v}{\DD t}+\beta y u\right)+fu = -\phi_y,\\
     &\phi_z = b,\\
-    &\Ro\left(\frac{Db}{Dt}\right)+\Bu N^2w = 0,\\
+    &\Ro\left(\frac{\DD b}{\DD t}\right)+\Bu N^2w = 0,\\
     &u_x+v_y+w_z = 0
 \end{align}
 where we have the two nondimensional number
