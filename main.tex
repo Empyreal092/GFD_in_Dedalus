@@ -1,10 +1,11 @@
-\documentclass[11pt,letterpaper]{report}
+\documentclass[11pt,letterpaper]{book}
 \usepackage[utf8]{inputenc}
 \usepackage[left=1in,right=1in,top=1in,bottom=1in]{geometry}
 % -----------------------------------
 \usepackage{amsfonts,amsmath}
 \usepackage{graphicx,float}
-\usepackage{tocloft}
+\usepackage{tocloft, csquotes}
+
 % -----------------------------------
 \usepackage{hyperref}
 \hypersetup{%
@@ -46,7 +47,7 @@
     \end{center}
 \end{titlepage}
 
-\setcounter{tocdepth}{3}
+\setcounter{tocdepth}{4}
 \tableofcontents
 % -----------------------------------
 \chapter{Introduction}
@@ -57,17 +58,17 @@
 \cftchapterprecis{Ryan Sh\`iji\'e D\`u}
 \input{2D_Euler/doc.tex}
 
-\chapter{2D Barotropic Quasi-geostrophic (QG) model}
-\cftchapterprecis{Ryan Sh\`iji\'e D\`u}
-\input{Baro_QG/doc.tex}
+% \chapter{2D Barotropic Quasi-geostrophic (QG) model}
+% \cftchapterprecis{Ryan Sh\`iji\'e D\`u}
+% \input{Baro_QG/doc.tex}
 
 \chapter{2D QG-Near Inertial Wave (QG-NIW) model}
 \cftchapterprecis{Ryan Sh\`iji\'e D\`u}
 \input{2D_QGNIW/doc.tex}
 
-\chapter{Two-Layer QG}
-\cftchapterprecis{Ryan Sh\`iji\'e D\`u}
-\input{2Layer_QG/doc.tex}
+% \chapter{Two-Layer QG}
+% \cftchapterprecis{Ryan Sh\`iji\'e D\`u}
+% \input{2Layer_QG/doc.tex}
 
 
 

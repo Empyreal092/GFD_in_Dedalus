@@ -1,0 +1,86 @@
+This is a collection of computer simulations of Geophysical Fluid Dynamics (GFD) models using the Dedalus version 3 solver\footnote{\url{https://dedalus-project.org/}}. The combination of two delineates the content of this collection, which we will detail in this introduction. The editor's personal philosophy for modeling and simulation is also sprinkled throughout. 
+
+\section{Dedalus}
+We will be using the newest version of the Dedalus solver, a flexible and efficient spectral partial differential equations solver. Dedalus comes with great documentation and a few illuminating examples that shows how to use it. This collection aims to expand on the list of examples by implementing models in GFD. Along the way we will introduce some tools and tricks that makes working with Dedalus easier, a list of them is in Section \ref{sec:Ded_tools}. These implementations could be the start of deeper study of these models, or they could be examples on how to use Dedalus. 
+
+\subsection{Working with distributed parallelism via MPI}
+In particular, Dedalus uses distributed parallelism via MPI. Dedalus hides much of the complexity of working with MPI. However, an advanced user of Dedalus cannot forget its parallel architecture. All our examples work with multiple cores in distributed systems (a server with multiple nodes). For a tutoruial on how to use Dedalus v3 on the NYU Greene supercomputer, see this page: \url{https://github.com/CAOS-NYU/Dedalusv3_GreeneSingularity}.
+
+\subsection{Dedalus GFD tools}\label{sec:Ded_tools}
+\paragraph{Adaptive timestep for when velocity is not a vector field}
+The examples on Dedalus' website that have adaptive timestep uses the \texttt{d3.CFL} function, that take a vector field velocity as the input for calculating the timestep. However, often in GFD models, velocity comes from the derivatives of a streamfunction, and is not a vector field in Dedalus. We implement a simple CFL based adaptive timestep that take in the velocity as separate scalar fields. See the 2D Euler in \ref{chap:2DEuler} example for full details. Note that we need to use the \texttt{d3.GlobalFlowProperty} to take maximum over MPI.
+
+\paragraph{Calculating spectrum}
+
+\subsection{Desired features in Dedalus}
+Despite the power of Dedalus, there are some features we would like that is not currently implemented. This is a list of wants we have for Dedalus. We feel these should be possible to implement in the spectral set-up of Dedalus. We would be happy to contribute and implement them, but we are currently unclear how.
+
+\paragraph{Arbitrary linear operators in doubly periodic domain}\label{sec:ded_want_linop}
+We would like a way to define new linear operators that is only expressible as operations on the Fourier coefficient. More specifically, the linear operator $\mcal{P}$ is defined by a user provided a matrix $\ve P$ such that
+\begin{align}
+    \mcal{F}\{\mcal{P}(\psi)\}_{\ve k} = \ve P_{\ve k}\hat\psi_{\ve k}.
+\end{align}
+where $\cal{F}$ and $\hat{\cdot}$ both means the Fourier transform and $\ve P_{\ve k}$ is the $\ve k=(k,\ell)$ element of the $\ve P$ matrix.
+
+These operators are very common in GFD models. They include fractional and negative Laplacian of the form $|k|^{-d}$ used for the inversion in the famous $\alpha$-turbulence models \parencite{PierrehumbertEtAl_94,SmithEtAl_02} and for hypo-diffusion in turbulence simulation with inverse cascade \parencite{MajdaEtAl_97,VallgrenLindborg_11,CalliesEtAl_16}. There are also more unconventional operators in the literature, e.g., the $\mcal{P}$ in \cite[(3.2)]{Xie_20}:
+\begin{align}
+    \mcal{P} = \frac{i}{2}\frac{\nabla^2}{-1+\nabla^2/4}\label{eq:YBJp_pop}
+\end{align}
+where we have suppressed the geophysical constants for clarity. This operator still follows the form \eqref{eq:YBJp_pop}.
+
+Going a bridge further, some linear operator takes vector Fourier coefficient. That is
+\begin{align}
+    \mcal{F}\{\mcal{P}(\ve\psi)\}_{\ve k} = \ve P_{\ve k}\hat{\ve\psi}_{\ve k}
+\end{align}
+where 
+\begin{align}
+    \ve\psi(x,y) = \begin{bmatrix}
+        \psi_1(x,y)\\
+        \psi_2(x,y)\\
+        \vdots\\
+        \psi_n(x,y)
+    \end{bmatrix}
+\end{align}
+is a $n$-vector of 2D fields and each $\ve P_{\ve k}$ is a $n$-by-$n$ matrix. This means $\ve P$ is a $n\times n\times m\times m$ tensor where $m$ is the maximally resolved wave numbers. An example of this kind of linear operator is \cite{CalliesEtAl_16}, which is a generalization of the Eady model \parencite{Eady_49, TullochSmith_09}. These operators essentially comes from Green's function of elliptic equations and reduce a 3D elliptic solve to a few 2D Fourier transforms. Being able to define these linear operators in Dedalus would be immensely helpful. 
+
+\subsection{Shortcomings of Dedalus}
+Dedalus is not without its shortcomings. Here we list a few that we face occasionally. Compare with the last section, these are inherent deficiencies of the spectral method or needs significant software engineering to fix. We list them here to inform potential users know the sacrifice that comes with using Dedalus. But obviously we still love Dedalus as a tool since we are writing this collection.
+
+\paragraph{Limited domain}
+Being a spectral solver, Dedalus cannot solve problems that are on arbitrary domains. 
+
+A surprising discovery for us is that Dedalus cannot use parallelism on a closed box. In Cartesian settings, it needs a direction to be Fourier to be able to run in parallel\footnote{\url{https://groups.google.com/u/1/g/dedalus-users/c/DVB995tMs-g/m/lSHGTZbBBgAJ}}. This is disappointing since this exclude efficient simulation of classic models like the barotropic vorticity model of wind-driven gyres \parencite[\S 19.4]{Vallis_17}. 
+
+
+\section{Choice of models}
+In research, one comes up with the model first and choose the appropriate solver. Dedalus aims to be a component solve for many models. Since this collection is GFD in Dedalus, we take the opposite approach and pick models that is well set-up for Dedalus to solve. This means we will solve problems that are in periodic domain or on a circle or sphere. We aim to implement all GFD models that are commonly solve spectrally. This includes the examples in pyqg (\url{https://pyqg.readthedocs.io/en/latest/equations.html}) and GeophysicalFlows.jl(\url{https://fourierflows.github.io/GeophysicalFlowsDocumentation/stable/}). About SQG, see \ref{sec:ded_want_linop}.
+
+More importantly, Dedalus is a PDE solver. It is well suited to perform Direct Numerical Simulation (DNS), as opposed to Large Eddy Simulation (LES) or General Circulation Model (GCM). They are different tools that solve different problems. Dedalus is efficient enough for high enough resolution simulation that we assume all relevant dynamics of the model can be represented. We will use Dedalus to solve austere models in idealized set-ups. We take a philosophical approach well summarized in \cite{Vallis_16}:
+\begin{displayquote}
+    The moniker ‘GFD’ has also come to imply a methodology in which one makes the maximum possible simplifications to a problem, perhaps a seemingly very complex problem, seeking to reduce it to some bare essence. It suggests an austere approach, devoid of extraneous detail or superfluous description, so providing the fundamental principles and language for understanding geophysical flows without being overwhelmed by any inessentials that may surround the core problem. In this sense, GFD describes a method as well as an object of study.
+\end{displayquote}
+
+\subsection{Nondimensionalization}
+\newcommand{\Ro}{\{\text{Ro}\}}
+\newcommand{\Fr}{\{\text{Fr}\}}
+\newcommand{\Ub}{\left\{\frac{\text{Fr}^2}{\text{Ro}^2}\right\}}
+\newcommand{\Bu}{\left\{\frac{\text{Ro}^2}{\text{Fr}^2}\right\}}
+
+One consequence of simulating austere models is that nondimensionalizing the equations often will produce only a few relevant nondimensional parameters for the dynamics. For us, this greatly simplifies the task of understanding the model and generalize the conclusion we obtain. We will always simulate the nondimensional version of the equations in the following examples. This agree with the approach of GeophysicalFlows.jl but contrast with that of pyqg\footnote{The examples use dimensional numbers, see \url{https://pyqg.readthedocs.io/en/latest/examples/layered.html}.}. 
+
+In particular, we will use the notation of \cite{Vallis_96a}:
+\begin{displayquote}
+    Here, and in the rest of the paper, expressions are written in dimensional form. The relevant non-dimensional parameters are also given, enclosed in curly brackets, $\{\}$. The pure dimensional form may be recovered simply by setting to unity the contents of the curly brackets. The non-dimensional form is recovered by setting all the physical parameters (such as $g$ and $f$) to unity. This notation enables both the asymptotic ordering and physical appreciation of the terms to be facilitated.
+\end{displayquote}
+For example, the Boussinesq system reads (cf. \cite[(PE.1-4)]{Vallis_17}):
+\begin{align}
+    &\Ro\left(\frac{Du}{Dt}-\beta y v\right)-fv = -\phi_x,\\
+    &\Ro\left(\frac{Dv}{Dt}+\beta y u\right)+fu = -\phi_y,\\
+    &\phi_z = b,\\
+    &\Ro\left(\frac{Db}{Dt}\right)+\Bu N^2w = 0,\\
+    &u_x+v_y+w_z = 0
+\end{align}
+where we have the two nondimensional number
+\begin{align}
+    \Ro = \frac{U}{fL};\qquad \Fr = \frac{U}{NH}.
+\end{align}
