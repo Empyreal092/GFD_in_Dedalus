@@ -1,0 +1,91 @@
+\graphicspath{{2Layer_QG/code/plot_snap/figs/}}
+\renewcommand{\Bu}{\text{Bu}}
+
+\section{The full model nondimensionalized}
+We start with the 2 layer QG model with mean flow, $\beta$, and topography \parencite[(5.85-86)]{Vallis_17} (in the notation of \cite{Vallis_96a}):
+\begin{align}
+    &\frac{\pe q_1}{\pe t}+J(\psi_1,q_1)+U_1\frac{\pe q_1}{\pe x}+\left(\{\xi_1^{-2}\}\beta+\{\Bu_1^{-1}\}\frac{f_0^2(U_1-\{U_r\}U_2)}{g'H_1}\right)\frac{\pe\psi_1}{\pe x} = 0;\label{eq:2lay_eq1}\\
+    \{A\}&\frac{\pe q_2}{\pe t}+J(\psi_2,q_2)+U_2\frac{\pe q_2}{\pe x}+\left(\{\xi_2^{-2}\}\beta+\{\Bu_2^{-1}\}\frac{f_0^2(U_2-\{U_r^{-1}\}U_1)}{g'H_2}\right)\frac{\pe\psi_2}{\pe x} = 0.\label{eq:2lay_eq2}
+\end{align}
+where
+\begin{align}
+    q_1 &= \nabla^2\psi_1 + \{\Bu_1^{-1}\}\frac{f_0^2}{g'H_1}(\{U_r\}\psi_2-\psi_1);\label{eq:2lay_pv1}\\
+    q_2 &= \nabla^2\psi_2 + \{\Bu_2^{-1}\}\frac{f_0^2}{g'H_2}(\{U_r^{-1}\}\psi_1-\psi_2)+\left\{\frac{\alpha}{\text{Ro}_2}\right\}\frac{f_0}{H_2}\eta.\label{eq:2lay_pv2}
+\end{align}
+We have nondimensionalized time to be the advective timescale of the first layer:
+\begin{align}
+    T = \frac{L_1}{U_1}.
+\end{align}
+Then we nondimensionalized \eqref{eq:2lay_eq1} and \eqref{eq:2lay_pv1} with length $L_1$ and \eqref{eq:2lay_eq2} and \eqref{eq:2lay_pv2} with length $L_2$. We have introduced the nondimensional number $\xi$ which is the ratio between the Rhine scale and the lengthscale of each layer \parencite{HeldLarichev_96}
+\begin{align}
+    \xi_i^{-2} = \frac{\beta L_i^2}{|U_i|}
+\end{align}
+and $\alpha$ which is the ratio of the typical topographic height versus the second layer's height
+\begin{align}
+    \alpha = \frac{\eta}{H_2}.
+\end{align}
+If the height and mean flow of the two layers are not equal, we have two parameters for their ratio
+\begin{align}
+    U_r = \frac{|U_2|}{|U_1|}, \qdt{and} A = \frac{|U_1|L_2}{|U_2|L_1}
+\end{align}
+We also have the more familiar quantities
+\begin{align}
+    L_{i,d} = \frac{\sqrt{g'H_i}}{f_0} \qdt{,} \text{Ro}_2 = \frac{|U_2|}{f_0L_2} \qdt{and} \text{Bu}_i = \frac{L_{i,d}^2}{L_i^2}.
+\end{align}
+
+\section{The symmetric, flat bottom case}
+\subsection{The simplified model}
+The equation simplifies drastically when we make the upper/lower layer symmetry assumption \parencite{LarichevHeld_95}. We take $H_1=H_2 = H/2$ and $U_1=-U_2=U$. Then the equation becomes
+\begin{align}
+    &\frac{\pe q_1}{\pe t}+J(\psi_1,q_1)+U\frac{\pe q_1}{\pe x}+\left(\{\xi^{-2}\}\beta+\{8\Bu^{-1}\}\frac{4f_0^2U}{g'H}\right)\frac{\pe\psi_1}{\pe x} = 0,\label{eq:2lay_sym_eq1}\\
+    &\frac{\pe q_2}{\pe t}+J(\psi_2,q_2)-U\frac{\pe q_2}{\pe x}+\left(\{\xi^{-2}\}\beta-\{8\Bu^{-1}\}\frac{4f_0^2U}{g'H}\right)\frac{\pe\psi_2}{\pe x} = 0;\label{eq:2lay_sym_eq2}
+\end{align}
+where
+\begin{align}
+    q_1 &= \nabla^2\psi_1 + \{4\Bu^{-1}\}\frac{2f_0^2}{g'H}(\psi_2-\psi_1),\label{eq:2lay_sym_pv1}\\
+    q_2 &= \nabla^2\psi_2 + \{4\Bu^{-1}\}\frac{2f_0^2}{g'H}(\psi_1-\psi_2)+\left\{\frac{\alpha}{\text{Ro}}\right\}\frac{2f_0}{H}\eta.\label{eq:2lay_sym_pv2}
+\end{align}
+We have 
+\begin{align}
+    \xi^{-2} = \frac{\beta L^2}{U} \qdt{,} \text{Bu} = \frac{2g'H}{f_0^2L^2} = \frac{L_{d}^2}{L^2} \qdt{and} \alpha = \frac{2\eta}{H}.
+\end{align}
+Note that this implies (cf. \cite[(9.103)]{Vallis_17})
+\begin{align}
+    L_d = \frac{2\sqrt{g'H/2}}{f_0} \qdt{with} k_d^2 = \frac{4f_0^2}{g'H} = \frac{8}{L_d^2}.
+\end{align}
+This is an ok definition when we connect to the continuously stratified case by using (cf. \cite[(5.138)]{Vallis_17})
+\begin{align}
+    L_d = \frac{NH}{f} \qdt{with} N^2 = \frac{g'}{H/2}.
+\end{align}
+$\xi$ and $\Bu$ are not independent since their only freedom is in picking $L$. In our simulation, we pick $L=L_d$ such that $\text{Bu}=1$. 
+We further simplify by setting flat topography ($\alpha=0$). The only free parameter is $\xi$
+\begin{align}
+    \xi^{-2}= \frac{\beta L^2}{U} = \frac{\beta L_d^2}{U}
+\end{align}
+It is the two-layer version of the `Charney–Green number’. 
+
+\subsection{Linear stability analysis}
+We take only the linear terms of the above model, and dispense of all unnecessary parameters:
+\begin{align}
+    &\frac{\pe q_1}{\pe t}+\frac{\pe q_1}{\pe x}+\left(\xi^{-2}+8\Bu^{-1}\right)\frac{\pe\psi_1}{\pe x} = 0,\label{eq:2lay_sym_eq1_lin}\\
+    &\frac{\pe q_2}{\pe t}-\frac{\pe q_2}{\pe x}+\left(\xi^{-2}-8\Bu^{-1}\right)\frac{\pe\psi_2}{\pe x} = 0;\label{eq:2lay_sym_eq2_lin}
+\end{align}
+where
+\begin{align}
+    q_1 &= \nabla^2\psi_1 + 4\Bu^{-1}(\psi_2-\psi_1),\label{eq:2lay_sym_pv1_lin}\\
+    q_2 &= \nabla^2\psi_2 + 4\Bu^{-1}(\psi_1-\psi_2).\label{eq:2lay_sym_pv2_lin}
+\end{align}
+
+This system if isomorphic to \cite[(9.107)]{Vallis_17}. Therefore we can copy down the answer:
+\begin{align}
+    c &= -\frac{\xi^{-2}}{K^2+8\Bu^{-1}}\left\{ 1+\frac{8\Bu^{-1}}{2K^2}\pm\frac{8\Bu^{-1}}{2K^2}\left[1+4\frac{K^4(K^4-8^2\Bu^{-2})}{8^2\xi^{-4}\Bu^{-2}}\right]^{1/2} \right\}.
+\end{align}
+We have recovered \cite[(9.114)]{Vallis_17} with $\hat{k}_d^2 = 8$ and (cf. \cite[(9.115)]{Vallis_17})
+\begin{align}
+    \xi^{-2} = \hat{k}_\beta^2 = \frac{\beta L_d^2}{U}.
+\end{align}
+If we pick $\xi=2$ following \cite[Table 1]{HeldLarichev_96}, this means that
+\begin{align}
+    \frac{\hat{k}_\beta}{\hat{k}_d} = \frac{1}{4\sqrt{2}}
+\end{align}
+which quantifies the amount of inverse cascade between the energy injection scale of baroclinic instability and the arrest by $\beta$.
