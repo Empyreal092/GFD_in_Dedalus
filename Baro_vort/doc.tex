@@ -14,7 +14,7 @@ where
 If $f$ is constant, it is the 2D incompressible Euler equation. 
 
 \section{Freely decaying simulation of 2D Euler}
-We run freely decaying simulation with $f$ constant. We pick the initial energy containing scale of be around 1 and have a $10\times 10$ domain. We use $\nabla^8$ dissipation interpreted spectrally as $k^8+\ell^8$. 
+We run freely decaying simulation with $f$ constant. We pick the initial energy containing scale of be around 1 and have a $15\times 15$ domain. We use $\nabla^8$ dissipation interpreted spectrally as $k^8+\ell^8$. 
 
 Figure \ref{fig:2DEuler_zeta_t} shows the snap shots of vorticity and the streamfunction over the evolution of the simulation. We see a convincing inverse cascade and the formation of coherent vortices. Figure \ref{fig:2DEuler_energy} keep track of the kinetic energy and enstrophy. We see that, as expected, they experience a rapid initial decay. Afterwards, they are approximately conserved. Figure \ref{fig:2DEuler_spec} shows the evolution of the enstrophy spectra. The theoretical expectation is for them to have a $k^{-1}$ slope. We see that this is approximately true in early time. We also see that the hyper-dissipation is damping the small scale effectively.
 
@@ -41,4 +41,8 @@ Figure \ref{fig:2DEuler_zeta_t} shows the snap shots of vorticity and the stream
     \label{fig:2DEuler_spec}
 \end{figure}
 
+% \section{Vortex crystal on a polar-cap}
+% \cite[(2.2.10), p. 603]{Batchelor_53}
+
 \section{Stochastically forced-dissipative simulation}
+
