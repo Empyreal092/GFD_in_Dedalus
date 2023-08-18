@@ -8,7 +8,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 # Numerics Parameters
-L = 10; Lx, Ly = L, L
+L = 15; Lx, Ly = L, L
 log_n = 10; Nx, Ny = 2**log_n, 2**log_n
 dtype = np.float64
 
@@ -60,7 +60,7 @@ solver.stop_sim_time = stop_sim_time
 # Initial conditions
 zeta.fill_random('c', distribution='normal', scale=0.14*2*np.pi) # Random noise
 # keep the initial forcing near the same scale
-zeta.low_pass_filter(shape=(42, 42)); zeta.high_pass_filter(shape=(38, 38))
+zeta.low_pass_filter(shape=(32, 32)); zeta.high_pass_filter(shape=(28, 28))
 
 # Analysis
 snapdata = solver.evaluator.add_file_handler('2DEuler_snap', sim_dt=0.1, max_writes=50)
