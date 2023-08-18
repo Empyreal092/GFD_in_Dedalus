@@ -1,16 +1,20 @@
-\graphicspath{{2D_Euler/code/plot_snap/figs/}}
+\graphicspath{{Baro_vort/code/plot_snap/figs/}}
 
-We start with perhaps the most simple model of geophysical turbulence, 2D incompressible Euler. We can write the model in vorticity form \parencite[\S 4.2.1]{Vallis_17}:
+We start with perhaps the most simple model of geophysical turbulence, barotropic vorticity model. We can write the model in vorticity form \parencite[\S 4.2.1]{Vallis_17}:
 \begin{align}
-    &\frac{\DD \zeta}{\DD t} = 0,\\
+    &\frac{\DD}{\DD t}\left( \{\text{Ro}^{-1}\}f+\zeta \right) = 0,\\
     &\zeta = \nabla^2\psi,\\
     &u = -\frac{\pe\psi}{\pe y}, v = \frac{\pe\psi}{\pe x}.
 \end{align}
+where
+\begin{align}
+    \text{Ro} = \frac{U}{fL}.
+\end{align}
 
-There is no nondimensional number in this model. 
+If $f$ is constant, it is the 2D incompressible Euler equation. 
 
-\section{Freely decaying simulation}
-We run freely decaying simulation where we pick the initial energy containing scale of be around 1 and have a $10\times 10$ domain. We use $\nabla^8$ dissipation interpreted spectrally as $k^8+\ell^8$. 
+\section{Freely decaying simulation of 2D Euler}
+We run freely decaying simulation with $f$ constant. We pick the initial energy containing scale of be around 1 and have a $10\times 10$ domain. We use $\nabla^8$ dissipation interpreted spectrally as $k^8+\ell^8$. 
 
 Figure \ref{fig:2DEuler_zeta_t} shows the snap shots of vorticity and the streamfunction over the evolution of the simulation. We see a convincing inverse cascade and the formation of coherent vortices. Figure \ref{fig:2DEuler_energy} keep track of the kinetic energy and enstrophy. We see that, as expected, they experience a rapid initial decay. Afterwards, they are approximately conserved. Figure \ref{fig:2DEuler_spec} shows the evolution of the enstrophy spectra. The theoretical expectation is for them to have a $k^{-1}$ slope. We see that this is approximately true in early time. We also see that the hyper-dissipation is damping the small scale effectively.
 

@@ -70,27 +70,27 @@ Note that since we have the energy containing scale nondimensionalized to be 1, 
 
 We use the same hyper-diffusivity as \cite[(2.9a,b)]{RochaEtAl_18}. We pick $\kappa_e=\nu_w = 8\times 10^{-7}$. This is roughly the same dissipation as the numbers in \cite[Tabel 4]{RochaEtAl_18} as in our nondimensionalization and $512^2$ resolution.
 
-\subsection{The balanced flow generation}
-We run a 2D Euler simulation to generate the background mean flow using the code in Chapter \ref{chap:2DEuler}. We start the energy according to \cite[(4.2)]{RochaEtAl_18} and pick the roughly correct amplitude so that the resulting field matches the amplitude of the \cite{RochaEtAl_18} paper. We let the system evolve and Figure \ref{fig:PVbalanced} the resulting balanced flow. It looks similar to Figure 5(a) of \cite{RochaEtAl_18}. 
-\begin{figure}[h]
-    \centering
-    % \includegraphics{PVbalanced}
-    \caption{Left: the entire PV field. Right: a zoomed in picture of $(1/2)^2$ of the domain, with time and PV scaled so that to match the numbers of \cite{RochaEtAl_18}.}
-    \label{fig:PVbalanced}
-\end{figure}
+\subsection{The QG-NIW Simulation}
+We run a 2D Euler simulation to generate the background mean flow using the code in Chapter \ref{chap:2DEuler}. We start the energy according to \cite[(4.2)]{RochaEtAl_18} and pick the roughly correct amplitude so that the resulting field matches the amplitude of the \cite{RochaEtAl_18} paper. 
 
-\subsection{QG-NIW Simulation}
-We simulate the QG-NIW model by adding in a wave field of
+Then we simulate the QG-NIW model by adding in a wave field of
 \begin{align}
     \phi = \frac{1}{\sqrt{2}}(1+i)
 \end{align}
-on top of the above PV field. Figure \ref{fig:QGNIW_t1} shows the result. They compare well with Figure 5 of \cite{RochaEtAl_18}.
-\begin{figure}[h]
+on top of the above PV field. Figure \ref{fig:QGNIW_fields_t} shows the result. They compare well with Figure 5 of \cite{RochaEtAl_18}. We also dianagose the energies and action of the QG-NIW simulation in Figure \ref{fig:QGNIW_energies}. We see convincing conversion of kinetic energy to potential energy and conservation of total energy and wave action.
+\begin{figure}
     \centering
-    % \includegraphics{QGNIW_t1}
-    % \includegraphics{QGNIW_t10}
-    \caption{}
-    \label{fig:QGNIW_t}
+    \includegraphics{QGNIW_fields_t1}
+    \includegraphics{QGNIW_fields_t10}
+    \caption{Left: the PV field. Right: the Wave action density.}
+    \label{fig:QGNIW_fields_t}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics{QGNIW_energies}
+    \caption{The time evolution of energies and action of the QG-NIW model.}
+    \label{fig:QGNIW_energies}
 \end{figure}
 
 \section{Some comments}
@@ -101,7 +101,7 @@ However, the IMEX is an imperfect solver for the QG-NIW system. We observe that 
 
 The YBJ\textsuperscript{+} equation in \cite{AsselinYoung_19} has other benefits of course. To simulate it in Dedalus, we need to be able to define an unusual linear operator, $\mcal{P}$ in \cite[(3.2)]{Xie_20}. It is currently unclear to us on how to do this. For more see the comments in Section  \ref{sec:ded_want_linop}.
 
-With all these caveat, we do not recommend using Dedalus to simulation the QG-NIW system at this time. We recommend a custom implementation using exponential time integrator\footnote{A 1D example is \url{https://github.com/Empyreal092/MMT_Public}.}.
+With all these caveat, we do not recommend using Dedalus to simulation the QG-NIW system at this time. We recommend a custom implementation using exponential time integrator\footnote{A 1D example is \url{https://github.com/Empyreal092/MMT_Public} \parencite{DuBuhler_23}.}.
 
 \subsection{Another implementation in v2}
 A Dedalus solver for QG-NIW also exists using Dedalus version 2 \parencite{Conn_2023}. The current implementation uses the more recent version 3, which is being actively updated. For example, Dedalus only recently (June 25, 2023)\footnote{\url{https://github.com/DedalusProject/dedalus/commit/d3843a7394e06c05bf56ba2710723e42ba19ef39}\;} allowed restart with partial data in v3 (the \verb|allow_missing| flag in \verb|solver.load_state|). Our version adaptively changes the timestep, therefore is more efficient. Their version uses a lower over RK method, which requires very small timestep for stability, and might suffer the same lack of action conservation. 
