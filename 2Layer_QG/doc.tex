@@ -1,41 +1,41 @@
 \graphicspath{{2Layer_QG/code/plot_snap/figs/}}
 \renewcommand{\Bu}{\text{Bu}}
 
-\section{The full model nondimensionalized}
-We start with the 2 layer QG model with mean flow, $\beta$, and topography \parencite[(5.85-86)]{Vallis_17} (in the notation of \cite{Vallis_96a}):
-\begin{align}
-    &\frac{\pe q_1}{\pe t}+J(\psi_1,q_1)+U_1\frac{\pe q_1}{\pe x}+\left(\{\xi_1^{-2}\}\beta+\{\Bu_1^{-1}\}\frac{f_0^2(U_1-\{U_r\}U_2)}{g'H_1}\right)\frac{\pe\psi_1}{\pe x} = 0;\label{eq:2lay_eq1}\\
-    \{A\}&\frac{\pe q_2}{\pe t}+J(\psi_2,q_2)+U_2\frac{\pe q_2}{\pe x}+\left(\{\xi_2^{-2}\}\beta+\{\Bu_2^{-1}\}\frac{f_0^2(U_2-\{U_r^{-1}\}U_1)}{g'H_2}\right)\frac{\pe\psi_2}{\pe x} = 0.\label{eq:2lay_eq2}
-\end{align}
-where
-\begin{align}
-    q_1 &= \nabla^2\psi_1 + \{\Bu_1^{-1}\}\frac{f_0^2}{g'H_1}(\{U_r\}\psi_2-\psi_1);\label{eq:2lay_pv1}\\
-    q_2 &= \nabla^2\psi_2 + \{\Bu_2^{-1}\}\frac{f_0^2}{g'H_2}(\{U_r^{-1}\}\psi_1-\psi_2)+\left\{\frac{\alpha}{\text{Ro}_2}\right\}\frac{f_0}{H_2}\eta.\label{eq:2lay_pv2}
-\end{align}
-We have nondimensionalized time to be the advective timescale of the first layer:
-\begin{align}
-    T = \frac{L_1}{U_1}.
-\end{align}
-Then we nondimensionalized \eqref{eq:2lay_eq1} and \eqref{eq:2lay_pv1} with length $L_1$ and \eqref{eq:2lay_eq2} and \eqref{eq:2lay_pv2} with length $L_2$. We have introduced the nondimensional number $\xi$ which is the ratio between the Rhine scale and the lengthscale of each layer \parencite{HeldLarichev_96}
-\begin{align}
-    \xi_i^{-2} = \frac{\beta L_i^2}{|U_i|}
-\end{align}
-and $\alpha$ which is the ratio of the typical topographic height versus the second layer's height
-\begin{align}
-    \alpha = \frac{\eta}{H_2}.
-\end{align}
-If the height and mean flow of the two layers are not equal, we have two parameters for their ratio
-\begin{align}
-    U_r = \frac{|U_2|}{|U_1|}, \qdt{and} A = \frac{|U_1|L_2}{|U_2|L_1}
-\end{align}
-We also have the more familiar quantities
-\begin{align}
-    L_{i,d} = \frac{\sqrt{g'H_i}}{f_0} \qdt{,} \text{Ro}_2 = \frac{|U_2|}{f_0L_2} \qdt{and} \text{Bu}_i = \frac{L_{i,d}^2}{L_i^2}.
-\end{align}
+% \section{The full model nondimensionalized}
+% We start with the 2 layer QG model with mean flow, $\beta$, and topography \parencite[(5.85-86)]{Vallis_17} (in the notation of \cite{Vallis_96a}):
+% \begin{align}
+%     &\frac{\pe q_1}{\pe t}+J(\psi_1,q_1)+U_1\frac{\pe q_1}{\pe x}+\left(\{\xi_1^{-2}\}\beta+\{\Bu_1^{-1}\}\frac{f_0^2(U_1-\{U_r\}U_2)}{g'H_1}\right)\frac{\pe\psi_1}{\pe x} = 0;\label{eq:2lay_eq1}\\
+%     \{A\}&\frac{\pe q_2}{\pe t}+J(\psi_2,q_2)+U_2\frac{\pe q_2}{\pe x}+\left(\{\xi_2^{-2}\}\beta+\{\Bu_2^{-1}\}\frac{f_0^2(U_2-\{U_r^{-1}\}U_1)}{g'H_2}\right)\frac{\pe\psi_2}{\pe x} = 0.\label{eq:2lay_eq2}
+% \end{align}
+% where
+% \begin{align}
+%     q_1 &= \nabla^2\psi_1 + \{\Bu_1^{-1}\}\frac{f_0^2}{g'H_1}(\{U_r\}\psi_2-\psi_1);\label{eq:2lay_pv1}\\
+%     q_2 &= \nabla^2\psi_2 + \{\Bu_2^{-1}\}\frac{f_0^2}{g'H_2}(\{U_r^{-1}\}\psi_1-\psi_2)+\left\{\frac{\alpha}{\text{Ro}_2}\right\}\frac{f_0}{H_2}\eta.\label{eq:2lay_pv2}
+% \end{align}
+% We have nondimensionalized time to be the advective timescale of the first layer:
+% \begin{align}
+%     T = \frac{L_1}{U_1}.
+% \end{align}
+% Then we nondimensionalized \eqref{eq:2lay_eq1} and \eqref{eq:2lay_pv1} with length $L_1$ and \eqref{eq:2lay_eq2} and \eqref{eq:2lay_pv2} with length $L_2$. We have introduced the nondimensional number $\xi$ which is the ratio between the Rhine scale and the lengthscale of each layer \parencite{HeldLarichev_96}
+% \begin{align}
+%     \xi_i^{-2} = \frac{\beta L_i^2}{|U_i|}
+% \end{align}
+% and $\alpha$ which is the ratio of the typical topographic height versus the second layer's height
+% \begin{align}
+%     \alpha = \frac{\eta}{H_2}.
+% \end{align}
+% If the height and mean flow of the two layers are not equal, we have two parameters for their ratio
+% \begin{align}
+%     U_r = \frac{|U_2|}{|U_1|}, \qdt{and} A = \frac{|U_1|L_2}{|U_2|L_1}
+% \end{align}
+% We also have the more familiar quantities
+% \begin{align}
+%     L_{i,d} = \frac{\sqrt{g'H_i}}{f_0} \qdt{,} \text{Ro}_2 = \frac{|U_2|}{f_0L_2} \qdt{and} \text{Bu}_i = \frac{L_{i,d}^2}{L_i^2}.
+% \end{align}
 
-\section{The symmetric, flat bottom case}
-\subsection{The simplified model}
-The equation simplifies drastically when we make the upper/lower layer symmetry assumption \parencite{LarichevHeld_95}. We take $H_1=H_2 = H/2$ and $U_1=-U_2=U$. Then the equation becomes
+\section{The symmetric, flat bottom model}
+\subsection{The nondimensional equations}
+The 2 layer model simplifies drastically when we make the upper/lower layer symmetry assumption \parencite{LarichevHeld_95}. We take $H_1=H_2 = H/2$ and $U_1=-U_2=U$. Then the equation becomes
 \begin{align}
     &\frac{\pe q_1}{\pe t}+J(\psi_1,q_1)+U\frac{\pe q_1}{\pe x}+\left(\{\xi^{-2}\}\beta+\{8\Bu^{-1}\}\frac{4f_0^2U}{g'H}\right)\frac{\pe\psi_1}{\pe x} = 0,\label{eq:2lay_sym_eq1}\\
     &\frac{\pe q_2}{\pe t}+J(\psi_2,q_2)-U\frac{\pe q_2}{\pe x}+\left(\{\xi^{-2}\}\beta-\{8\Bu^{-1}\}\frac{4f_0^2U}{g'H}\right)\frac{\pe\psi_2}{\pe x} = 0;\label{eq:2lay_sym_eq2}
@@ -84,13 +84,14 @@ We have recovered \cite[(9.114)]{Vallis_17} with $\hat{k}_d^2 = 8$ and (cf. \cit
 \begin{align}
     \xi^{-2} = \hat{k}_\beta^2 = \frac{\beta L_d^2}{U}.
 \end{align}
-If we pick $\xi=2$ following \cite[Table 1]{HeldLarichev_96}, this means that
-\begin{align}
-    \frac{\hat{k}_\beta}{\hat{k}_d} = \frac{1}{4\sqrt{2}}
-\end{align}
-which quantifies the amount of inverse cascade between the energy injection scale of baroclinic instability and the arrest by $\beta$.
+% If we pick $\xi=2$ following \cite[Table 1]{HeldLarichev_96}, this means that
+% \begin{align}
+%     \frac{\hat{k}_\beta}{\hat{k}_d} = \frac{1}{4\sqrt{2}}
+% \end{align}
+% which quantifies the amount of inverse cascade between the energy injection scale of baroclinic instability and the arrest by $\beta$.
 
-\subsection{Results: jets}
+\subsection{Simulation of jets formation}
+We pick $\xi = 0.4$ for a large $\zeta$ effect while still have a baroclinically unstable background. At early time, baroclinic instability appears with its distinct pattern. In Figure \ref{fig:2Layjets_q1_t9d00} we also plot a sin wave with $0.634k_d$ wavenumber. We see that the instability pattern is a bit smaller, consistent with the movement of the most unstable mode to smaller scales in \cite[Fig. 9.14]{Vallis_17}. At later time, the flow develop into jets. Figure \ref{fig:2Layjets_q1_t150d00} shows clear PV staircases with homogenized region in between. Figure \ref{fig:2Layjets_q1zonalmean_t150d00} plots the zonally averaged perturbation PV $q_1$ against a sin wave of wavenumber $1/2\xi$. We see that matches well the distance between jets.
 
 \begin{figure}
     \centering
@@ -114,11 +115,8 @@ which quantifies the amount of inverse cascade between the energy injection scal
     \label{fig:2Layjets_q1zonalmean_t150d00}
 \end{figure}
 
-
-
-\subsection{Results}
-
-cf. \cite[Fig. 3]{LarichevHeld_95}
+\subsection{2 layer turbulence}
+We instead pick $\xi=1.5$ on a larger domain for a simulation with small $\zeta$ effect. Figure \ref{fig:2Lay_qbrbc_t150d00} shows the barotropic and baroclinic PV. These are visually similar to \cite[Fig. 3]{LarichevHeld_95}. We also plot the $q_1$ enstrophy spectrum in Figure \ref{fig:2Lay_q1spec_t150d00}. The spectrum has a slope of $-1$, matching the theoretical expectation.
 
 \begin{figure}
     \centering
