@@ -64,6 +64,8 @@ We further simplify by setting flat topography ($\alpha=0$). The only free param
 \end{align}
 It is the two-layer version of the `Charney–Green number’. 
 
+Finally, we simulate using a $|k|^8$ hyper-diffusivity on $q_i$ for small scale dissipation and an Ekman damping only in the bottom layer for damping the inverse cascade.
+
 \subsection{Linear stability analysis}
 We take only the linear terms of the above model, and dispense of all unnecessary parameters:
 \begin{align}
@@ -91,7 +93,11 @@ We have recovered \cite[(9.114)]{Vallis_17} with $\hat{k}_d^2 = 8$ and (cf. \cit
 % which quantifies the amount of inverse cascade between the energy injection scale of baroclinic instability and the arrest by $\beta$.
 
 \subsection{Simulation of jets formation}
-We pick $\xi = 0.4$ for a large $\zeta$ effect while still have a baroclinically unstable background. At early time, baroclinic instability appears with its distinct pattern. In Figure \ref{fig:2Layjets_q1_t9d00} we also plot a sin wave with $0.634k_d$ wavenumber. We see that the instability pattern is a bit smaller, consistent with the movement of the most unstable mode to smaller scales in \cite[Fig. 9.14]{Vallis_17}. At later time, the flow develop into jets. Figure \ref{fig:2Layjets_q1_t150d00} shows clear PV staircases with homogenized region in between. Figure \ref{fig:2Layjets_q1zonalmean_t150d00} plots the zonally averaged perturbation PV $q_1$ against a sin wave of wavenumber $1/2\xi$. We see that matches well the distance between jets.
+We pick $\xi = 0.4$ for a large $\zeta$ effect while still have a baroclinically unstable background. At early time, baroclinic instability appears with its distinct pattern. In Figure \ref{fig:2Layjets_q1_t9d00} we also plot a sin wave with $0.634k_d$ wavenumber. We see that the instability pattern is a bit smaller, consistent with the movement of the most unstable mode to smaller scales in \cite[Fig. 9.14]{Vallis_17}. At later time, the flow develop into jets. Figure \ref{fig:2Layjets_q1_t150d00} shows clear PV staircases with homogenized region in between. Figure \ref{fig:2Layjets_q1zonalmean_t150d00} plots the zonally averaged perturbation PV $q_1$ against a sin wave of wavenumber $1/2\xi$. We see that matches well the distance between jets. Note that
+\begin{align}
+    \frac{1}{2\xi} = \frac{1}{2}\hat{k}_\beta = \sqrt{\gamma}
+\end{align}
+where $\gamma$ is defined in \cite[(9.115)]{Vallis_17}. 
 
 \begin{figure}
     \centering
@@ -116,7 +122,7 @@ We pick $\xi = 0.4$ for a large $\zeta$ effect while still have a baroclinically
 \end{figure}
 
 \subsection{2 layer turbulence}
-We instead pick $\xi=1.5$ on a larger domain for a simulation with small $\zeta$ effect. Figure \ref{fig:2Lay_qbrbc_t150d00} shows the barotropic and baroclinic PV. These are visually similar to \cite[Fig. 3]{LarichevHeld_95}. We also plot the $q_1$ enstrophy spectrum in Figure \ref{fig:2Lay_q1spec_t150d00}. The spectrum has a slope of $-1$, matching the theoretical expectation.
+We instead pick $\xi=1.5$ on a larger domain for a simulation with small $\beta$ effect. Figure \ref{fig:2Lay_qbrbc_t150d00} shows the barotropic and baroclinic PV. These are visually similar to \cite[Fig. 3]{LarichevHeld_95}. We also plot the $q_1$ enstrophy spectrum in Figure \ref{fig:2Lay_q1spec_t150d00}. The spectrum has a slope of $-1$, matching the theoretical expectation.
 
 \begin{figure}
     \centering

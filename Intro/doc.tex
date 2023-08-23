@@ -7,7 +7,7 @@ We will be using the newest version of the Dedalus solver, a flexible and effici
 In particular, Dedalus uses distributed parallelism via MPI. Dedalus hides much of the complexity of working with MPI. However, an advanced user of Dedalus cannot forget its parallel architecture. All our examples work with multiple cores in distributed systems (a server with multiple nodes). For a tutoruial on how to use Dedalus v3 on the NYU Greene supercomputer, see this page: \url{https://github.com/CAOS-NYU/Dedalusv3_GreeneSingularity}.
 
 \subsection{Dedalus GFD tools}\label{sec:Ded_tools}
-\paragraph{Adaptive timestep for when velocity is not a vector field}
+\paragraph{Adaptive timestep for when velocity comes from a streamfunction}
 The examples on Dedalus' website that have adaptive timestep uses the \texttt{d3.CFL} function, that take a vector field velocity as the input for calculating the timestep. However, often in GFD models, velocity comes from the derivatives of a streamfunction, and is not a vector field in Dedalus. We implement a simple CFL based adaptive timestep that take in the velocity as separate scalar fields. See the 2D Euler in Chapter \ref{chap:2DEuler} example for full details\footnote{\url{https://github.com/Empyreal092/GFD_in_Dedalus/blob/main/2D_Euler/code/2D_Euler.py}}. Note that we need to use the \texttt{d3.GlobalFlowProperty} to take maximum over MPI.
 
 \paragraph{Calculating spectrum}
@@ -85,3 +85,11 @@ where we have the two nondimensional number
 \begin{align}
     \Ro = \frac{U}{fL};\qquad \Fr = \frac{U}{NH}.
 \end{align}
+
+\subsection{Models to be implemented}
+Dedalus is powerful and it takes many examples to explore all its features. The implemented models at the moments reflect our bias of QG models, and there is a lack of models on curvilinear domains. Here is a list of models seems worthwhile to us to implement in Dedalus. We especially for students of GFD to try to implement some models. 
+
+\begin{itemize}
+    \item The Matsuno-Gill model for equatorial dynamics \parencite{Matsuno_66,Gill_80}. The same model on the sphere is done recently by \cite{ShamirEtAl_23}.
+    \item Some linear model of tide and lee waves. Possible examples are \cite{SmithYoung_02}, \cite[(13.2)]{Cushman-RoisinBeckers_11}, and \cite{NikurashinFerrari_10}. 
+\end{itemize}
