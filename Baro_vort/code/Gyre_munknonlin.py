@@ -32,13 +32,12 @@ edge = disk.edge
 (th,r)= dist.local_grids(disk) 
 
 # Fields
-q = dist.Field(bases=disk)
+zeta = dist.Field(bases=disk)
 psi = dist.Field(bases=disk)
 tau_psi = dist.Field(bases=edge)
-tau_q = dist.Field(bases=edge)
+tau_z = dist.Field(bases=edge)
 
-beta = dist.Field(bases=disk); beta['g'] = r*np.sin(th)/R_bet
-qbc = dist.Field(bases=edge); qbc['g'] = R*np.sin(th)/R_bet
+beta = dist.Field(bases=disk); beta['g'] = r*np.sin(th)
 
 wstr = dist.Field(bases=disk); wstr['g'] = -np.sin(4*np.pi*r*np.sin(th))
 
@@ -49,26 +48,25 @@ grad = lambda A: d3.Gradient(A)
 integ = lambda A: d3.Integrate(A, ('r', 'th'))
 
 KE = d3.integ(grad(psi)@grad(psi))/2
-Enstrophy = d3.integ((q-beta)**2)/2
+Enstrophy = d3.integ(zeta**2)/2
 
 # Problem
-problem = d3.IVP([q, psi, tau_psi, tau_q], namespace=locals())
-problem.add_equation("lap(psi) + lift(tau_psi) = q - beta")
-problem.add_equation("dt(q) - eps_M*lap(q) + lift(tau_q) = wstr - R_bet*skew(grad(psi))@grad(beta) - eps_M*lap(beta)"); R_bet_input = 0 # linear problem
-# problem.add_equation("dt(q) - eps_M*lap(q) + lift(tau_q) = wstr - R_bet*skew(grad(psi))@grad(q) - eps_M*lap(beta)")
+problem = d3.IVP([zeta, psi, tau_psi, tau_z], namespace=locals())
+problem.add_equation("lap(psi) + lift(tau_psi) = zeta")
+problem.add_equation("dt(zeta) - eps_M*lap(zeta) + lift(tau_z) = wstr - skew(grad(psi))@grad(beta) - R_bet*(skew(grad(psi))@grad(zeta))"); # linear problem
 problem.add_equation("psi(r=R) = 0")
-problem.add_equation("q(r=R) = qbc")
+problem.add_equation("zeta(r=R) = 0")
 
 # Solver
 solver = problem.build_solver(timestepper)
 solver.stop_sim_time = stop_sim_time
 
 # Initial condition
-q['g'] = beta['g'] 
+zeta['g'] = 0
 
 # Analysis
 snapdata = solver.evaluator.add_file_handler('Gyre_munknonlin_%i_snap' %R_bet_input, sim_dt=3, max_writes=150)
-snapdata.add_task(-(-q), name='Q')
+snapdata.add_task(-(-zeta), name='ZETA')
 snapdata.add_task(-(-psi), name='PSI')
 snapdata.add_task(-(-beta), name='BETA')
 

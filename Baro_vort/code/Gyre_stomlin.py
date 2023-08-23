@@ -29,7 +29,7 @@ edge = disk.edge
 (th,r)= dist.local_grids(disk) 
 
 # Fields
-q = dist.Field(bases=disk)
+zeta = dist.Field(bases=disk)
 psi = dist.Field(bases=disk)
 tau_psi = dist.Field(bases=edge)
 
@@ -39,32 +39,29 @@ beta['g'] = r*np.sin(th)
 wstr = dist.Field(bases=disk)
 wstr['g'] = -np.sin(4*np.pi*r*np.sin(th))
 
-qbc = dist.Field(bases=edge)
-qbc['g'] = R*np.sin(th)
-
 # Substitutions
 lift = lambda A: d3.Lift(A, disk, -1)
 grad = lambda A: d3.Gradient(A)
 integ = lambda A: d3.Integrate(A, ('r', 'th'))
 
 KE = d3.integ(grad(psi)@grad(psi))/2
-Enstrophy = d3.integ((q-beta)**2)/2
+Enstrophy = d3.integ((zeta)**2)/2
 
 # Problem
-problem = d3.IVP([q, psi, tau_psi], namespace=locals())
-problem.add_equation("lap(psi) + lift(tau_psi) = q - beta")
-problem.add_equation("dt(q) + eps_s*q = wstr - skew(grad(psi))@grad(beta) + eps_s*beta")
+problem = d3.IVP([zeta, psi, tau_psi], namespace=locals())
+problem.add_equation("lap(psi) + lift(tau_psi) = zeta")
+problem.add_equation("dt(zeta) + eps_s*zeta = wstr - skew(grad(psi))@grad(beta)")
 problem.add_equation("psi(r=R) = 0")
 
 # Solver
 solver = problem.build_solver(timestepper)
 solver.stop_sim_time = stop_sim_time
 
-q['g'] = beta['g'] # set zeta to zero
+zeta['g'] = 0 # set zeta to zero
 
 # Analysis
-snapdata = solver.evaluator.add_file_handler('Gyre_stomlin_snap', sim_dt=10, max_writes=30)
-snapdata.add_task(-(-q), name='Q')
+snapdata = solver.evaluator.add_file_handler('Gyre_stomlin_snap', sim_dt=10, max_writes=35)
+snapdata.add_task(-(-zeta), name='ZETA')
 snapdata.add_task(-(-psi), name='PSI')
 snapdata.add_task(-(-beta), name='BETA')
 
