@@ -13,7 +13,7 @@ where
 
 If $f$ is constant, it is the 2D incompressible Euler equation. We note that we do not use quasi-geostrophic to describe this model and reserve that name to the model with a finite deformation radius.
 
-\section{Freely decaying simulation of 2D Euler}
+\section{Freely decaying simulation of 2D Euler}\label{sec:2DEuler_freedecay}
 We run freely decaying simulation with $f$ constant. We pick the initial energy containing scale of be around 1 and have a $15\times 15$ domain. We use $\nabla^8$ dissipation interpreted spectrally as $k^8+\ell^8$. 
 
 Figure \ref{fig:2DEuler_zeta_t} shows the snap shots of vorticity and the streamfunction over the evolution of the simulation. We see a convincing inverse cascade and the formation of coherent vortices. Figure \ref{fig:2DEuler_energy} keep track of the kinetic energy and enstrophy. We see that, as expected, they experience a rapid initial decay. Afterwards, they are approximately conserved. Figure \ref{fig:2DEuler_spec} shows the evolution of the enstrophy spectra. The theoretical expectation is for them to have a $k^{-1}$ slope. We see that this is approximately true in early time. We also see that the hyper-dissipation is damping the small scale effectively.
@@ -44,10 +44,10 @@ Figure \ref{fig:2DEuler_zeta_t} shows the snap shots of vorticity and the stream
 % \section{Vortex crystal on a polar-cap}
 % \cite[(2.2.10), p. 603]{Batchelor_53}
 
-\section{Stochastically forced-dissipative simulation}
+\section{Stochastically forced--dissipative simulation}
 
 
-\section{Wind-forced gyres on a disk}
+\section{Wind-forced gyres on a disk}\label{sec:wind_gyres_disk}
 A particular application of the barotropic vorticity model is the models of wind-forced gyres \cite[\S 19.1.2.I]{Vallis_17}. Dedalus unable to use MPI parallelism when solving equations in a closed box. Therefore we choose to use a disk domain. In some loose sense, it captures the geometry of the Pacific. More importantly, this provides a chance to work with curvilinear domains in Dedalus.
 
 We start with the full nonlinear barotropic vorticity equation on a $\beta$-plane \cite[(19.57)(19.59)]{Vallis_17}, \cite[\S 2]{IerleySheremet_95}:
@@ -95,11 +95,11 @@ Now we solve the evolutionary nonlinear Stommel model
 \end{align}
 with $\epsilon_M = 0.06^3$ (cf. \cite{IerleySheremet_95}) and various value of $R_\beta$ for different nonlinear effects. In particular, the $S=0$ is the linear simulation with the $J(\psi,\zeta)$ term. All simulation has converged to equilibrium according to the the above definition. Figure \ref{fig:Gyre_munk_zetaall} shows the streamfunctions for simulation with different nonlinearities, titled by $S = \sqrt{R_\beta}$. This resembles the Munk (slip) case of \cite[Fig. 19.11]{Vallis_17}. We see that more stronger advection would push the circulation pattern towards the direction of the flow, eventually separating the subtropical gyres into two smaller ones. We also see the more nonlinear simulation has less pronounced western boundary currents. This is consistent with the results of \cite[Fig. 19.11]{Vallis_17} and \cite[Figure 2]{IerleySheremet_95}.
 
-It is known that the nonlinear Munk model has multiple stable equilibriums in certain parameter regimes \parencite{CessiIerley_95, IerleySheremet_95}. Our time evolution method could be adapted to change the parameters slowly (via restarting) to find the equilibriums. We do not pursue that direction here any further.
+It is known that the nonlinear Munk model has multiple stable equilibriums in certain parameter regimes \parencite{CessiIerley_95, IerleySheremet_95}. Our time evolution method could be adapted to change the parameters slowly (via restarting) to find the multiple equilibriums. We do not pursue that direction here any further.
 
 \begin{figure}
     \centering
     \includegraphics{Gyre_munk_zetaall}
-    \caption{Streamfunctiona $\psi$ of the equilibrated nonlinear Munk model titled by $S = \sqrt{R_\beta}$}
+    \caption{Streamfunctiona $\psi$ of the equilibrated nonlinear Munk model titled by $S = \sqrt{R_\beta}$. These are nonlinear streamfunctions that ranges from -0.24 to 0.24.}
     \label{fig:Gyre_munk_zetaall}
 \end{figure}

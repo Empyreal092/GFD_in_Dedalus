@@ -36,7 +36,7 @@ and the wave dispersivity:
 \begin{align}
     &\hbar = \frac{N^2}{fm^2}\frac{1}{LU_e} = \frac{1}{\text{Ro}}\frac{N^2}{f^2 m^2 L^2}.
 \end{align}
-Note that Rossby number and the small parameter $\epsilon$ does not appear explicitly in the model. We only assume that they are small. Instead, their ratio appear as the wave amplitude $\alpha$. The distinguished limit assumptions in \cite{XieVanneste_15, WagnerYoung_15, WagnerYoung_16} is $\alpha = 1$. However, in \cite{RochaEtAl_18} it is allowed to vary in the $O(1)$ range. We also noticed that the Rossby number in \cite[Table 4]{RochaEtAl_18} is wrong. It should be $\approx 0.025$. However, the parameters that appear in the equations, $\hbar$ and $\alpha$, are correct.
+Note that the Rossby number and the small parameter $\epsilon$ do not appear explicitly in the model. We only assume that they are small. Instead, their ratio appears as the wave amplitude $\alpha$. The distinguished limit assumptions in \cite{XieVanneste_15, WagnerYoung_15, WagnerYoung_16} is $\alpha = 1$. However, in \cite{RochaEtAl_18} it is allowed to vary in the $O(1)$ range. We also noticed that the Rossby number in \cite[Table 4]{RochaEtAl_18} is wrong. It should be $\approx 0.025$. However, the parameters that appear in the equations, $\hbar$ and $\alpha$, are correct.
 
 The QG-NIW conserves energy and action. In particular we have the two energies (\cite[(3.2)]{RochaEtAl_18}):
 \begin{align}
@@ -45,7 +45,7 @@ The QG-NIW conserves energy and action. In particular we have the two energies (
 \end{align}
 After the nondimensionalization, we have the total energy formula
 \begin{align}
-    \mcal{P} = \frac{1}{2}|\nabla\psi|^2+\{\alpha\hbar\}\frac{1}{4}\frac{N^2}{f^2m^2} |\nabla\phi|^2.
+    \mcal{E} = \frac{1}{2}|\nabla\psi|^2+\{\alpha\hbar\}\frac{1}{4}\frac{N^2}{f^2m^2} |\nabla\phi|^2.
 \end{align}
 Note the introduction of the nondimensional numbers in from of the potential energy in the formula. They need to be accounted for in order for the total energy formula to be correct. 
 
@@ -71,7 +71,7 @@ Note that since we have the energy containing scale nondimensionalized to be 1, 
 We use the same hyper-diffusivity as \cite[(2.9a,b)]{RochaEtAl_18}. We pick $\kappa_e=\nu_w = 8\times 10^{-7}$. This is roughly the same dissipation as the numbers in \cite[Tabel 4]{RochaEtAl_18} as in our nondimensionalization and $512^2$ resolution.
 
 \subsection{The QG-NIW Simulation}
-We run a 2D Euler simulation to generate the background mean flow using the code in Chapter \ref{chap:2DEuler}. We start the energy according to \cite[(4.2)]{RochaEtAl_18} and pick the roughly correct amplitude so that the resulting field matches the amplitude of the \cite{RochaEtAl_18} paper. 
+We run a 2D Euler simulation to generate the background mean flow using the code in Chapter \ref{sec:2DEuler_freedecay}. We start the energy according to \cite[(4.2)]{RochaEtAl_18} and pick the roughly correct amplitude so that the resulting field matches the amplitude of the \cite{RochaEtAl_18} paper. 
 
 Then we simulate the QG-NIW model by adding in a wave field of
 \begin{align}
