@@ -10,7 +10,6 @@ logger = logging.getLogger(__name__)
 # Numerics Parameters
 L = 80; Lx, Ly = L, L
 log_n = 9; Nx, Ny = 2**log_n, 2**log_n
-dtype = np.float64
 
 dealias = 3/2
 stop_sim_time = 200
