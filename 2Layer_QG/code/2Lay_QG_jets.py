@@ -51,8 +51,8 @@ J = lambda A, B: dx(A)*dy(B)-dy(A)*dx(B)
 # wavenumber interpretation of lap8
 l8H = lambda A: dx(dx(dx(dx(dx(dx(dx(dx(A))))))))+dy(dy(dy(dy(dy(dy(dy(dy(A))))))))
 
-KE1 = integ(dx(psi1)**2+dy(psi1)**2)**0.5
-KE2 = integ(dx(psi2)**2+dy(psi2)**2)**0.5
+KE1 = integ(dx(psi1)**2+dy(psi1)**2)*0.5
+KE2 = integ(dx(psi2)**2+dy(psi2)**2)*0.5
 
 # Problem
 problem = d3.IVP([q1, q2, psi1, psi2, tau_psi1], namespace=locals())
