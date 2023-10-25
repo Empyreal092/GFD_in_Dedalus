@@ -1,0 +1,38 @@
+In this chapter, we give examples of how to use the eigenproblem model of Dedalus. In particular, we show how to extract eigenvectors when the problem is complex. This is not shown in the examples on the official website. To do this, we solve the linear instability analysis problem of three-dimensional baroclinic instability in the quasi-geostrophic (QG) model.
+
+\section{The 3DQG model under baroclinically unstable mean states}
+We have the 3D QG model in the $\beta$-plane under the mean zonal velocity $U(z)$. We have the surface meridional buoyancy gradient $B_y(z=-H, 0)$ from thermal wind balance. This also implies a mean meridional PV gradient
+\begin{align}
+    Q_y = \{\xi^{-2}\}\beta-\nabla^2 U-\{\Bu^{-1}\}\frac{\de}{\de z}\left(\frac{f^2}{N^2}\frac{\de U}{\de z}\right)
+\end{align}
+where we ignore the $\nabla^2 U$ term with our assumption that $U$ is horizontally constant. Now we have the 3DQG system:
+\begin{align}
+    &\frac{\DD q}{\DD t}+Uq_x+vQ_y = 0; \\
+    &\frac{\DD b}{\DD t}+Ub_x+vB_y = 0 \qdt{at} z=-H, 0; \\
+    &\nabla^2\psi + \{\Bu^{-1}\}\frac{\pe}{\pe z}\left(\frac{f^2}{N^2}\frac{\pe\psi}{\pe z}\right) = q \\
+    &\quad\qdt{w/} \psi_z = b/f \qdt{at} z=-H, 0; \\
+    &u = -\psi_y, \quad v = \psi_x.
+\end{align}
+We use the nondimensional number
+\begin{align}
+    \xi^{-2} = \frac{f_0 L}{U} \qdt{,} \Bu = \frac{N(0)^2H^2}{f_0^2L^2} = \frac{L_{d}^2}{L^2}.
+\end{align}
+
+\section{The Eady instability}
+
+
+\section{The ocean Charney instability}
+The Eady instability is an instability due to the interaction of two surface modes. We explore the effects of the interior PV gradient by studying the ocean Charney instability \parencite{CapetEtAl_16}. To begin, the ocean Charney instability is due to interaction between the top boundary and the interior. From the Charney–Stern–Pedlosky (CSP) condition, we know that for instability, we need $Q_y$ is the opposite sign to $U_z$ at the upper boundary \parencite[p. 351]{Vallis_17}. For the ocean, there are two ways for this to happen. For an eastward sheared top mean current $U_z>0$, we need $Q_y<0$. For this, we need the curvature of the zonal velocity to overwhelm the positive planetary PV gradient $\beta$. Now if the top mean current is westward sheared $U_z<0$, we need $Q_y>0$ which can be provided by the planetary PV gradient $\beta$. Both can happen in the ocean according to the global study of \cite{TullochEtAl_11}. We study the linear instability of both scenarios. 
+
+\subsection{Idealized profiles inspired by the ocean}
+For our preliminary examples to demonstrate Dedalus, we use idealized nondimensional profiles. Converting the code to take real data would be simple. 
+
+The 3DQG system above only needs stratification $N^2(z)$ and mean velocity $U(z)$ at vertical profiles as inputs. That is the data our data will take. We will use exponential stratification
+\begin{align}
+    N^2(z) = N^2 e^{z/\delta} \qdt{w/} \delta=0.2.
+\end{align}
+For velocity we use
+\begin{align}
+    U(z) = (1+z)e^{z/\delta}.
+\end{align}
+
