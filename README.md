@@ -8,7 +8,10 @@ The examples in this note expand on the examples provided by the Dedalus documen
 	 - Include function for calculating spectra for doubly periodic fields.
 	 - Solve the Stommel and Munk model on the circle. The only curvilinear example in the note.
  - 2D QG-Near Inertial Wave (QG-NIW) model
- - Baroclinically unstable two-layer QG
+ - The Quasi-Geostrophic (QG) model
+ 	 - Baroclinically unstable two-layer QG
+   	 - Rossby wave in linear QG
+ - Baroclinic modes of arbitrary stratification
  - Linear instability of 3DQG
 	 - Greatly expands on the eigenproblem example provided by the Dedalus documentation. In particular, we show how to obtain eigenvectors for a particular field.
 
