@@ -1,6 +1,6 @@
 \graphicspath{{3DQG_Linstab/code/figs/}}
 
-In this chapter, we give examples of how to use the eigenproblem model of Dedalus. In particular, we show how to extract eigenvectors when the problem is complex. This is not shown in the examples on the official website. To do this, we solve the linear instability analysis problem of three-dimensional baroclinic instability in the quasi-geostrophic (QG) model.
+We solve the linear instability analysis problem of three-dimensional baroclinic instability in the quasi-geostrophic (QG) model.
 
 \section{The 3DQG model under baroclinically unstable mean states}
 We have the 3D QG model in the $\beta$-plane under the mean zonal velocity $U(z)$. We have the surface meridional buoyancy gradient $B_y(z=-H, 0)$ from thermal wind balance. This also implies a mean meridional PV gradient
@@ -99,4 +99,4 @@ We pick the two cases of $\{\xi^{-2}\}=\pm0.5$ to look at the profile of the ins
 \end{figure}
 
 \section{Some comments}
-\cite{LuoCallies_23} has code to do linear instability analysis in Dedalus v2. We figured out how to obtain the eigenvectors from their code. In particular, we learned about the functions \verb|solver.set_state| and \verb|solver.state|, which exist in Dedalus v3 with modifications.
+\cite{LuoCallies_23} has code to do linear instability analysis in Dedalus v2. 

@@ -1,5 +1,54 @@
-\graphicspath{{2Layer_QG/code/plot_snap/figs/}}
+\graphicspath{{QG/code/}}
 \renewcommand{\Bu}{\text{Bu}}
+\renewcommand{\Ub}{\text{Bu}^{-1}}
+
+\section{Barotropic QG model}
+We have
+\begin{align}
+    &\frac{\DD}{\DD t} q+\{\xi^{-2}\}\beta v = 0,\\
+    &q = \nabla^2\psi - \{\Bu^{-1}\} k_d^2\psi,\\
+    &u = -\frac{\pe\psi}{\pe y}, v = \frac{\pe\psi}{\pe x}.
+\end{align}
+where the 
+\begin{align}
+    \xi^{-2} = \frac{\beta L^2}{U} \qdt{,} \text{Bu} = \frac{gH}{f_0^2L^2} = \frac{L_{d}^2}{L^2}
+\end{align}
+
+\subsection{Nonlinear freely decaying simulation}
+This is an easy modification of the barotropic vorticity code.
+
+\subsection{Rossby wave}
+We simulate finite deformation radius Rossby waves in a circle gyre. There is no mean flow $U$ in this example. We use the linear barotropic QG model. That is, we use \parencite[(6.64)]{Vallis_17}:
+\begin{align}
+    &\frac{\pe}{\pe t} q+\{\xi^{-2}\}\beta v = 0,\\
+    &q = \nabla^2\psi - \{\Bu^{-1}\} k_d^2\psi,\\
+    &u = -\frac{\pe\psi}{\pe y}, v = \frac{\pe\psi}{\pe x}.
+\end{align}
+Standard derivation gives the dispersion relation for this Rossby wave \parencite[(RW.3)]{Vallis_17}:
+\begin{align}
+    \omega = \frac{-\{\xi^{-2}\}\beta k}{k^2+\ell^2+\{\Bu^{-1}\}k_d^2}
+\end{align}
+We then have the phase velocity in the $x$-direction is
+\begin{align}
+    c_p^x = \frac{\omega\cdot k}{(k^2+\ell^2)} = \frac{-\{\xi^{-2}\}\beta k^2}{(k^2+\ell^2+\{\Bu^{-1}\}k_d^2)(k^2+\ell^2)}<0.
+\end{align}
+The group velocity is \parencite[(RW.4)]{Vallis_17}
+\begin{align}
+    c_g^x = \frac{\pe\omega}{\pe k} = \frac{\{\xi^{-2}\}\beta(k^2-\ell^2-\{\Bu^{-1}\}k_d^2)}{(k^2+\ell^2+\{\Bu^{-1}\}k_d^2)}.
+\end{align}
+We see that the phase velocity of the Rossby wave is always westward ($\beta>0$ always), while the group velocity's direction depends on the spatial scale of the wave.
+
+We simulate Rossby waves with $\Bu=1$ an $\xi^{-2}=1$ to focus on the effects of wave size. First, we make a wave package with $k=0.7$ and $\ell=0$. We plot the wave after some time in Figure \ref{fig:Rossby_k0d7_tt20d11}. It is clear that the group velocity is westward because the package has moved west. To see that the phase velocity is westward, please watch the \href{https://vimeo.com/936333986}{video}. 
+
+\begin{figure}
+    \centering
+    \includegraphics{Rossby_plots/Rossby_k0d7_tt20d11}
+    \caption{}
+    \label{fig:Rossby_k0d7_tt20d11}
+\end{figure}
+
+\href{https://vimeo.com/936333886}{video}. 
+
 
 % \section{The full model nondimensionalized}
 % We start with the 2 layer QG model with mean flow, $\beta$, and topography \parencite[(5.85-86)]{Vallis_17} (in the notation of \cite{Vallis_96a}):
@@ -33,9 +82,9 @@
 %     L_{i,d} = \frac{\sqrt{g'H_i}}{f_0} \qdt{,} \text{Ro}_2 = \frac{|U_2|}{f_0L_2} \qdt{and} \text{Bu}_i = \frac{L_{i,d}^2}{L_i^2}.
 % \end{align}
 
-\section{The symmetric, flat bottom model}
+\section{The 2-layer QG model under Phillips baroclinic instability}
 \subsection{The nondimensional equations}
-The 2 layer model simplifies drastically when we make the upper/lower layer symmetry assumption \parencite{LarichevHeld_95}. We take $H_1=H_2 = H/2$ and $U_1=-U_2=U$. Then the equation becomes
+The 2-layer model simplifies drastically when we make the upper/lower layer symmetry assumption \parencite{LarichevHeld_95}. We take $H_1=H_2 = H/2$ and $U_1=-U_2=U$. Then the equation becomes
 \begin{align}
     &\frac{\pe q_1}{\pe t}+J(\psi_1,q_1)+U\frac{\pe q_1}{\pe x}+\left(\{\xi^{-2}\}\beta+\{8\Bu^{-1}\}\frac{4f_0^2U}{g'H}\right)\frac{\pe\psi_1}{\pe x} = 0,\label{eq:2lay_sym_eq1}\\
     &\frac{\pe q_2}{\pe t}+J(\psi_2,q_2)-U\frac{\pe q_2}{\pe x}+\left(\{\xi^{-2}\}\beta-\{8\Bu^{-1}\}\frac{4f_0^2U}{g'H}\right)\frac{\pe\psi_2}{\pe x} = 0;\label{eq:2lay_sym_eq2}
@@ -90,7 +139,7 @@ We have recovered \cite[(9.114)]{Vallis_17} with $\hat{k}_d^2 = 8$ and (cf. \cit
 Now we can use the eigenvalue-problem module of Dedalus is solve the same problem numerically. Figure \ref{fig:2Lay_linstab} shows the growth rate. This is a reproduction of \cite[Fig. 9.14]{Vallis_17}.
 \begin{figure}
     \centering
-    \includegraphics{2Lay_linstab}
+    \includegraphics{plot_snap/figs/2Lay_linstab}
     \caption{}
     \label{fig:2Lay_linstab}
 \end{figure}
@@ -105,7 +154,7 @@ where $\gamma$ is defined in \cite[(9.115)]{Vallis_17}.
 
 \begin{figure}
     \centering
-    \includegraphics[width=\textwidth]{2Layjets_q1_t6d50}
+    \includegraphics[width=\textwidth]{plot_snap/figs/2Layjets_q1_t6d50}
     \caption{}
     \label{fig:2Layjets_q1_t6d50}
 \end{figure}
@@ -113,7 +162,7 @@ where $\gamma$ is defined in \cite[(9.115)]{Vallis_17}.
 
 \begin{figure}
     \centering
-    \includegraphics[width=\textwidth]{2Layjets_q1_t150d00}
+    \includegraphics[width=\textwidth]{plot_snap/figs/2Layjets_q1_t150d00}
     \caption{}
     \label{fig:2Layjets_q1_t150d00}
 \end{figure}
@@ -130,14 +179,14 @@ We instead pick $\xi=1.5$ on a larger domain for a simulation with small $\beta$
 
 \begin{figure}
     \centering
-    \includegraphics{2Lay_qbrbc_t150d00}
+    \includegraphics{plot_snap/figs/2Lay_qbrbc_t150d00}
     \caption{}
     \label{fig:2Lay_qbrbc_t150d00}
 \end{figure}
 
 \begin{figure}
     \centering
-    \includegraphics{2Lay_q1spec_t150d00}
+    \includegraphics{plot_snap/figs/2Lay_q1spec_t150d00}
     \caption{}
     \label{fig:2Lay_q1spec_t150d00}
 \end{figure}
